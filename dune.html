@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dune</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <script src="./script/script.js" defer></script>
+    <script src="./script/carrousel.js" defer></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" crossorigin="" defer></script>
+
+    <script src="./script/map.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="./media/poster/tt.png" alt="Dune Logo">
+    </header>
+    <main class="scroller">
+        <section id="accueil">
+            <h2>Only in cinemas</h2>
+            <div id="video"></div>
+        </section>
+
+        <section id="apropos">
+            <h2>About the film</h2>
+            <img src="./media/images/denis_villeneuve.webp" alt="Dune poster">
+
+            <article class="texte">
+                <p>Oscar nominee Denis Villeneuve (“Arrival,” “Blade Runner 2049”) directs Warner Bros. Pictures and
+                    Legendary Pictures’ “Dune,” the big-screen adaptation of Frank Herbert’s seminal bestselling
+                    book.
+                    A mythic and emotionally charged hero’s journey, “Dune” tells the story of Paul Atreides, a
+                    brilliant and gifted young man born into a great destiny beyond his understanding, who must
+                    travel to the most dangerous planet in the universe to ensure the future of his family and his
+                    people. As malevolent forces explode into conflict over the planet’s exclusive supply of the
+                    most precious resource in existence—a commodity capable of unlocking humanity’s greatest
+                    potential—only those who can conquer their fear will survive.
+                    Villeneuve directed “Dune” from a screenplay he co-wrote with Jon Spaihts and Eric Roth based on
+                    the novel of the same name written by Frank Herbert. Villeneuve also produced the film with Mary
+                    Parent, Cale Boyter and Joe Caracciolo, Jr. The executive producers are Tanya Lapointe, Joshua
+                    Grode, Herbert W. Gains, Jon Spaihts, Thomas Tull, Brian Herbert, Byron Merritt and Kim Herbert.
+                </p>
+            </article>
+
+        </section>
+
+        <section id="personnages">
+            <h2>Characters</h2>
+            <div class="test">
+                <div class="carrousel-conteneur">
+                    <div class="carrousel-personnages">
+                        <img src="./media/characters/baron_harkonnen.jpg" alt="Paul Atreides">
+                        <img src="./media/characters/duke_leto_atreides.jpg" alt="Duke Leto Atreides">
+                        <img src="./media/characters/lady_jessica.jpg" alt="Lady Jessica">
+                        <img src="./media/characters/chani.jpg" alt="Chani">
+                        <img src="./media/characters/stilgar.jpg" alt="Stilgar">
+                        <img src="./media/characters/gurney_halleck.jpg" alt="Gurney Halleck">
+                        <img src="./media/characters/duncan_idaho.jpg" alt="Duncan Idaho">
+                        <img src="./media/characters/rabban_harkonnen.jpg" alt="Rabban Harkonnen">
+                    </div>
+                </div>
+            </div>
+            <div></div>
+            <span class="prev">❮</span>
+            <span class="next">❯</span>
+
+            <div class="casting">
+                <p>Paul Atreides - Timothée Chalamet</p>
+                <p>Duke Leto Atreides - Oscar Isaac</p>
+                <p>Lady Jessica - Rebecca Ferguson</p>
+                <p>Chani - Zendaya</p>
+                <p>Stilgar - Javier Bardem</p>
+                <p>Gurney Halleck - Josh Brolin</p>
+                <p>Duncan Idaho - Jason Momoa</p>
+                <p>Rabban Harkonnen - Dave Bautista</p>
+            </div>
+
+        </section>
+
+        <section id="image">
+            <h2>Videos & images</h2>
+            <div>
+                <div class="carrousel-conteneur">
+                    <div class="carrousel-images">
+                        <img src="./media/images/12.jpg" alt="">
+                        <img src="./media/images/13.jpg" alt="">
+                        <img src="./media/images/14.jpg" alt="">
+                        <img src="./media/images/17.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <span class="prev">❮</span>
+            <span class="next">❯</span>
+
+        </section>
+
+        <section id="cinema">
+            <h2>Find a theater</h2>
+            <div></div>
+            <div class="coordonnée">
+                <p>Go to the official website</p>
+                <p>To find a theater near you, click <a href="#cinema">here</a>.</p>
+                <ul>
+                    <li>Latitude :</li>
+                    <li>Longitude :</li>
+                </ul>
+            </div>
+            <div id="carte"></div>
+
+        </section>
+
+        <section id="casting">
+                <h2>Cast and crew</h2>
+                <div class="cast"></div>
+                <div class="info"></div>
+        </section>
+    </main>
+
+</body>
+
+</html>
