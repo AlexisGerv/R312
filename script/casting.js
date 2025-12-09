@@ -12,35 +12,28 @@ async function genererCasting() {
   const infoBox = document.querySelector(".info");
 
   try {
-    // 1. On récupère les crédits du film
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/438631/credits?language=en-US",
       options
     );
     const data = await response.json();
     console.log(data);
-    // 2. On garde seulement les 15 premiers acteurs (5x3)
     const top15 = data.cast.slice(0, 15);
 
-    // 3. On vide le conteneur (supprime l'image statique de Paul s'il y en a une)
     castContainer.innerHTML = "";
 
-    // 4. On boucle pour créer chaque image
     top15.forEach((actor) => {
       const img = document.createElement("img");
 
-      // Image de l'acteur (ou image par défaut si absente)
       img.src = actor.profile_path
         ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
         : "https://placehold.co/200x300?text=Inconnu";
 
       img.alt = actor.name;
-      img.title = `${actor.name} joue ${actor.character}`; // Bulle au survol
+      img.title = `${actor.name} joue ${actor.character}`;
 
-      // 5. Clic sur une image : on charge la bio à côté
       img.addEventListener("click", () => afficherBio(actor.id, infoBox));
 
-      // Ajout à la grille
       castContainer.appendChild(img);
     });
   } catch (error) {
