@@ -14,10 +14,10 @@ async function genererCasting() {
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/438631/credits?language=en-US",
-      options
+      options 
     );
     const data = await response.json();
-    console.log(data);
+    
     const top15 = data.cast.slice(0, 15);
 
     castContainer.innerHTML = "";

@@ -1,13 +1,14 @@
-// Code simple pour piloter les carrousels Personnages et Images
 
-function initialiserCarrousel(sectionSelector, pisteSelector) {
+
+function initialiserCarrousel(sectionSelector, pisteSelector, castSelector) {
   const section = document.querySelector(sectionSelector);
   if (!section) return;
 
   const piste = section.querySelector(pisteSelector);
   const boutonsPrev = section.querySelectorAll('.prev');
   const boutonsNext = section.querySelectorAll('.next');
-  if (!piste || boutonsPrev.length === 0 || boutonsNext.length === 0) return;
+  const cast = section.querySelector(castSelector);
+  if (!piste || boutonsPrev.length === 0 || boutonsNext.length === 0 || !cast) return;
 
   let position = 0;
 
@@ -20,6 +21,7 @@ function initialiserCarrousel(sectionSelector, pisteSelector) {
     const largeur = largeurDiapo();
     if (!largeur) return;
     piste.style.transform = `translateX(-${position * largeur}px)`;
+    cast.style.transform = `translateX(-${position * largeur}px)`;
   }
 
   function changerDiapo(delta) {
@@ -29,10 +31,19 @@ function initialiserCarrousel(sectionSelector, pisteSelector) {
     afficherDiapo();
   }
 
+
+  function changerCast(delta) {
+    const total = cast.children.length;
+    if (!total) return;
+    position = (position + delta + total) % total;
+    afficherDiapo();
+  }
+
   boutonsPrev.forEach((bouton) =>
     bouton.addEventListener('click', (event) => {
       event.preventDefault();
       changerDiapo(-1);
+      changerCast(-1);
     })
   );
 
@@ -40,6 +51,7 @@ function initialiserCarrousel(sectionSelector, pisteSelector) {
     bouton.addEventListener('click', (event) => {
       event.preventDefault();
       changerDiapo(1);
+      changerCast(1);
     })
   );
 
@@ -48,8 +60,8 @@ function initialiserCarrousel(sectionSelector, pisteSelector) {
 }
 
 function lancerCarrousels() {
-  initialiserCarrousel('#personnages', '.carrousel-personnages');
-  initialiserCarrousel('#image', '.carrousel-images');
+  initialiserCarrousel('#personnages', '.carrousel-personnages', '.casting');
+  initialiserCarrousel('#image', '.carrousel-images', '.casting');
 }
 
 document.addEventListener('DOMContentLoaded', lancerCarrousels);
