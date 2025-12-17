@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dune</title>
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/carrousel.css">
     <script src="./script/script.js" defer></script>
     <script src="./script/carrousel.js" defer></script>
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -17,6 +18,7 @@
     <script src="./script/map.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="./script/casting.js" defer></script>
+    <script src="./script/index.mjs" type="module"></script>
 </head>
 
 <body>
@@ -26,14 +28,17 @@
 
     <aside class="RS">
         <div>
-           <a href="https://www.warnerbros.com/"> <img src="./media/logos/wb_logo.svg" alt="Warner Bros"></a>
-           <a href="https://www.legendarypictures.com/"> <img src="./media/logos/legendary_logo.svg" alt="Legendary Pictures"></a>
+            <a href="https://www.warnerbros.com/"> <img src="./media/logos/wb_logo.svg" alt="Warner Bros"></a>
+            <a href="https://www.legendarypictures.com/"> <img src="./media/logos/legendary_logo.svg"
+                    alt="Legendary Pictures"></a>
         </div>
 
         <div>
-            <a href="https://www.facebook.com/warnerbros/"> <img src="./media/logos/logo_facebook.svg" alt="Facebook"></a>
+            <a href="https://www.facebook.com/warnerbros/"> <img src="./media/logos/logo_facebook.svg"
+                    alt="Facebook"></a>
             <a href="https://twitter.com/warnerbros"> <img src="./media/logos/logo_twitter.svg" alt="Twitter"></a>
-            <a href="https://www.instagram.com/warnerbros/"> <img src="./media/logos/logo_instagram.svg" alt="Instagram"></a>
+            <a href="https://www.instagram.com/warnerbros/"> <img src="./media/logos/logo_instagram.svg"
+                    alt="Instagram"></a>
         </div>
     </aside>
 
@@ -66,55 +71,44 @@
 
         </section>
 
-        <section id="personnages">
+        <section id="slide1" class="carrousel">
             <h2>Characters</h2>
-            <div class="test">
-                <div class="carrousel-conteneur">
-                    <div class="carrousel-personnages">
-                        <img src="./media/characters/baron_harkonnen.jpg" alt="Paul Atreides">
-                        <img src="./media/characters/duke_leto_atreides.jpg" alt="Duke Leto Atreides">
-                        <img src="./media/characters/lady_jessica.jpg" alt="Lady Jessica">
-                        <img src="./media/characters/chani.jpg" alt="Chani">
-                        <img src="./media/characters/stilgar.jpg" alt="Stilgar">
-                        <img src="./media/characters/gurney_halleck.jpg" alt="Gurney Halleck">
-                        <img src="./media/characters/duncan_idaho.jpg" alt="Duncan Idaho">
-                        <img src="./media/characters/rabban_harkonnen.jpg" alt="Rabban Harkonnen">
-                    </div>
+            <div id="carrousel1">
+                <span class="prev">⟨</span>
+                <div>
+                    <img src="./media/characters/paul_atreides.jpg" alt="Timothée Chalamet: Paul Atreïdes" />
+                    <img src="./media/characters/lady_jessica.jpg" alt="Rebecca Ferguson: Lady Jessica" />
+                    <img src="./media/characters/duke_leto_atreides.jpg" alt="Oscar Isaac: Duke Leto Atreïdes" />
+                    <img src="./media/characters/duncan_idaho.jpg" alt="Jason Momoa: Duncan Idaho" />
+                    <img src="./media/characters/gurney_halleck.jpg" alt="Josh Brolin: Gurney Halleck" />
+                    <img src="./media/characters/dr_wellington_yueh.jpg" alt="Chang Chen: Dr. Wellington Yueh" />
+                    <img src="./media/characters/chani.jpg" alt="Zendaya: Chani" />
+                    <img src="./media/characters/stilgar.jpg" alt="Javier Bardem: Stilgar" />
+                    <img src="./media/characters/liet_kynes.jpg" alt="Sharon Duncan-Brewster: Liet Kynes" />
+                    <img src="./media/characters/baron_harkonnen.jpg" alt="Stellan Skarsgard: Baron Harkonnen" />
+                    <img src="./media/characters/rabban_harkonnen.jpg" alt="Dave Bautista: Rabban Harkonnen" />
                 </div>
+                <span class="next">⟩</span>
             </div>
-            <div></div>
-            <span class="prev">❮</span>
-            <span class="next">❯</span>
-
-            <div class="casting">
-                <ul>
-                    <li>Paul Atreides - Timothée Chalamet</li>
-                    <li>Duke Leto Atreides - Oscar Isaac</li>
-                    <li>Lady Jessica - Rebecca Ferguson</li>
-                    <li>Chani - Zendaya</li>
-                    <li>Stilgar - Javier Bardem</li>
-                    <li>Gurney Halleck - Josh Brolin</li>
-                    <li>Duncan Idaho - Jason Momoa</li>
-                    <li>Rabban Harkonnen - Dave Bautista</li>
-                </ul>
-            </div>
-
         </section>
 
-        <section id="image">
+        <section id="slide2" class="carrousel">
             <h2>Videos & images</h2>
-            <div>
-                <div class="carrousel-conteneur">
-                    <div class="carrousel-images">
-                        <img src="./media/images/13.jpg" alt="">
-                        <img src="./media/images/14.jpg" alt="">
-                        <img src="./media/images/17.jpg" alt="">
-                    </div>
+            <div id="carrousel2">
+                <span class="prev">⟨</span>
+                <div>
+                    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/n9xhJrPXop4"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe> -->
+                    <img src="media/images/09.jpg" alt="Image de production" />
+                    <img src="media/images/10.jpg" alt="Image de production" />
+                    <img src="media/images/12.jpg" alt="Image de production" />
+                    <img src="media/images/13.jpg" alt="Image de production" />
+                    <img src="media/images/14.jpg" alt="Image de production" />
+                    <img src="media/images/17.jpg" alt="Image de production" />
                 </div>
+                <span class="next">⟩</span>
             </div>
-            <span class="prev">❮</span>
-            <span class="next">❯</span>
-
         </section>
 
         <section id="cinema">

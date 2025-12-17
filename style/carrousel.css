@@ -1,0 +1,81 @@
+.carrousel {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  grid-template-rows: 1fr 60vh 10vh;
+  
+}
+
+.carrousel > div {
+  grid-column: 1 / span 4;
+  grid-row: 2;
+  background-color: rgba(58, 61, 41, 0.9);
+  display: flex;
+  justify-content: space-around;
+}
+
+.carrousel > div > div {
+  /* Référence pour le positionnement du texte et de l'image */
+  position: relative;
+  width: 80%;
+  height: 80%;
+}
+
+.carrousel > div > div > * {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.carrousel > div > div > img {
+  object-fit: contain;
+  width: 100%;
+  aspect-ratio: 4/3;
+  max-height: 70vh;
+  opacity: 0;
+  transition: 2s;
+}
+
+.carrousel > div > div > img.active {
+  opacity: 1;
+  transition: 1s;
+}
+
+/* Boutons */
+.carrousel > div > span {
+  color: white;
+  font-size: 4rem;
+  margin: 2vmin;
+  grid-row: 1 / span 2;
+  align-self: center;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.carrousel > div > span:first-of-type {
+  grid-column: 1;
+}
+
+.carrousel > div > span:last-of-type {
+  grid-column: 4;
+}
+
+.carrousel > div > span:hover {
+  color: orange;
+  transform: scale(1.25);
+}
+
+.carrousel > div > div::after {
+  content: var(--alt-text);
+  display: block;
+  width: 100%;
+  text-align: center;
+  height: 2em;
+  font-size: 16px;
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  bottom: 0;
+}
