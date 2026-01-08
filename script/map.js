@@ -1,102 +1,86 @@
-// Version minimale et lisible pour initialiser la carte et ajouter des marqueurs
-// Requirements: Leaflet chargé via CDN dans `dune.html` (objet global `L`).
+document.addEventListener("DOMContentLoaded", () => {
 
-const carte = L.map("carte").setView([47.322, 5.041], 12);
+    // 1. Initialisation de la carte
+    const map = L.map('carte').setView([46.603354, 1.888334], 6);
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "&copy; OpenStreetMap contributors",
-}).addTo(carte);
+    // 2. Ajout du fond de carte
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-L.control.scale().addTo(carte);
+    // 3. Création du bouton "Me Localiser"
+    const locateControl = L.control({ position: 'topright' }); // Position en haut à droite
 
-const cinemas = [
-  {
-    name: "Pathé Dijon",
-    addr: "12 Parvis de l’UNESCO, 21000 Dijon",
-    lat: 47.31792,
-    lon: 5.02988,
-  },
-  {
-    name: "Cinéma Olympia",
-    addr: "16 Av. Maréchal Foch, 21000 Dijon",
-    lat: 47.32363,
-    lon: 5.03009,
-  },
-  {
-    name: "Cinéma Le Darcy",
-    addr: "8 Place Darcy, 21000 Dijon",
-    lat: 47.32354,
-    lon: 5.03411,
-  },
-  {
-    name: "Cinéma L’Eldorado",
-    addr: "21 Rue Alfred-de-Musset, 21000 Dijon",
-    lat: 47.31446,
-    lon: 5.04882,
-  },
-  {
-    name: "Cinéma Devosge",
-    addr: "6 Rue Devosge, 21000 Dijon",
-    lat: null,
-    lon: null,
-  },
-  {
-    name: "Cinéma Cap Vert Quetigny",
-    addr: "Cinéma Cap Vert, 21800 Quetigny",
-    lat: null,
-    lon: null,
-  },
-];
+    locateControl.onAdd = function(map) {
+        // Création d'un div avec les styles de base de Leaflet pour s'intégrer visuellement
+        const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+        
+        // Style du bouton (blanc, curseur main, icône, taille)
+        div.innerHTML = `
+            <a href="#" title="Me localiser" role="button" aria-label="Me localiser" 
+               style="background-color: white; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: black; font-size: 18px;">
+               📍
+            </a>
+        `;
 
-// Les deux <li> déjà présents dans la page pour afficher latitude/longitude
-const latLi = document.querySelector("#cinema .coordonnée ul li:first-child");
-const lonLi = document.querySelector("#cinema .coordonnée ul li:nth-child(2)");
-function updateCoordList(lat, lon) {
-  if (!latLi || !lonLi) return;
-  latLi.textContent = `Latitude : ${Number(lat).toFixed(5)}`;
-  lonLi.textContent = `Longitude : ${Number(lon).toFixed(5)}`;
-}
+        // Action au clic sur le bouton
+        div.onclick = (e) => {
+            e.preventDefault(); // Empêche le comportement par défaut du lien
+            e.stopPropagation(); // Empêche de cliquer sur la carte à travers le bouton
+            
+            // Fonction magique de Leaflet pour trouver la position et zoomer
+            map.locate({ setView: true, maxZoom: 12 });
+        };
 
-// Ajoute un marqueur simple
-function addMarker(name, addr, lat, lon) {
-  const m = L.marker([lat, lon]).addTo(carte);
-  m.bindPopup(`<strong>${name}</strong><br>${addr}`);
-  m.on("click", () => updateCoordList(lat, lon));
-  return [lat, lon];
-}
+        return div;
+    };
 
-// Géocodage minimal via Nominatim (retourne {lat, lon} ou null)
-async function geocode(address) {
-  try {
-    const res = await fetch(
-      "https://nominatim.openstreetmap.org/search?format=json&q=" +
-        encodeURIComponent(address) +
-        "&limit=1"
-    );
-    if (!res.ok) return null;
-    const data = await res.json();
-    if (data && data[0])
-      return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
-  } catch (e) {
-    console.warn("geocode error", e);
-  }
-  return null;
-}
+    // Ajout du bouton à la carte
+    locateControl.addTo(map);
 
-// Ajout simple des cinémas: si coords présentes on ajoute, sinon on tente un géocodage
-(async function placeCinemas() {
-  const positions = [];
-  for (const c of cinemas) {
-    if (typeof c.lat === "number" && typeof c.lon === "number") {
-      positions.push(addMarker(c.name, c.addr, c.lat, c.lon));
-    } else {
-      const g = await geocode(c.addr);
-      if (g) positions.push(addMarker(c.name, c.addr, g.lat, g.lon));
-      else console.warn("Pas de coordonnées pour", c.name);
-    }
-  }
-  if (positions.length) carte.fitBounds(positions, { padding: [20, 20] });
-})();
+    // 4. Gestion de la localisation 
+    map.on('locationfound', (e) => {
+        // On ajoute un cercle bleu pour montrer la position de l'utilisateur
+        // On supprime l'ancien marqueur s'il existe déjà pour éviter les doublons
+        if (window.userMarker) {
+            map.removeLayer(window.userMarker);
+        }
+        
+        window.userMarker = L.circle(e.latlng, {
+            radius: e.accuracy / 2, // Le rayon dépend de la précision du GPS
+            color: '#C19A6B',       // Couleur sable/Dune
+            fillColor: '#C19A6B',
+            fillOpacity: 0.5
+        }).addTo(map).bindPopup("Vous êtes ici !").openPopup();
+    });
 
-// Cliquer sur la carte met à jour les deux <li>
-carte.on("click", (e) => updateCoordList(e.latlng.lat, e.latlng.lng));
+    // 5. Gestion des erreurs de localisation (ex: utilisateur refuse la géolocalisation)
+    map.on('locationerror', (e) => {
+        alert("Impossible de vous localiser. Veuillez autoriser la géolocalisation.");
+    });
+
+    // 6. Chargement des cinémas 
+    fetch('./media/cinema_fr.geojson')
+        .then(response => {
+            if (!response.ok) throw new Error("Erreur JSON");
+            return response.json();
+        })
+        .then(data => {
+            L.geoJSON(data, {
+                onEachFeature: (feature, layer) => {
+                    if (feature.properties) {
+                        const nom = feature.properties.NOM_ETABLISSEMENT || "Cinéma";
+                        const ville = feature.properties.COMMUNE || "";
+                        const ecrans = feature.properties.ECRANS || "?";
+                        
+                        layer.bindPopup(`
+                            <strong>${nom}</strong><br>
+                            📍 ${ville}<br>
+                            🎬 Écrans : ${ecrans}
+                        `);
+                    }
+                }
+            }).addTo(map);
+        })
+        .catch(error => console.error("Erreur:", error));
+});
